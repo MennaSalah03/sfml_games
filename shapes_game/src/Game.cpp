@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Game.hpp"
 
 
@@ -65,6 +66,10 @@ void Game::pollEvents()
                     break;
                 }
         }
+        this->enemy.setPosition(
+                    mousePosWindowView.x - this->enemy.getSize().x / 2,
+                    mousePosWindowView.y - this->enemy.getSize().y / 2
+                    );
     }
 }
 
@@ -73,7 +78,21 @@ void Game::pollEvents()
 void Game::update()
 {
     this->pollEvents();
+    this->updateMousPos();
+    std::cout << mousePosWindowView.x << " " << mousePosWindowView.y << "\n"; 
 }
+
+void Game::updateMousPos()
+{
+    /** Update the mouse position relative to game window.
+    * Return: void
+    */
+   if (sf::Mouse::getPosition(*this->window).x >= 0 && sf::Mouse::getPosition(*this->window).y >= 0)
+   {
+    this->mousePosWindowView = sf::Mouse::getPosition(*this->window);
+   }
+}
+
 
 /* Game visuals updates
 * 1. clears old frame

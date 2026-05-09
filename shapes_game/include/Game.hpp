@@ -20,11 +20,11 @@ class Game
 private:
 
     //variables
-    //windows
+    //window
     sf::RenderWindow *window; // pointer to window
     sf::VideoMode video_mode;
     sf::Event event;
-
+    sf::Vector2i mousePosWindowView;
     //Game objects
     sf::RectangleShape enemy;
 
@@ -46,6 +46,7 @@ public:
     // Functions
     void pollEvents();
     void update();
+    void updateMousPos();
     void render();
 
 };
