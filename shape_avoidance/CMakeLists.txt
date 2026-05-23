@@ -12,7 +12,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
 # 2. Add the executable
-add_executable(test_app src/main.cpp src/Game.cpp)
+add_executable(test_app
+                src/main.cpp
+                src/Game.cpp
+                src/Player.cpp
+                src/Enemy.cpp
+                )
 
 # 3. Finding header files
 target_include_directories(test_app PRIVATE include)

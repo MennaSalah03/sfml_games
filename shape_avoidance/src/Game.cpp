@@ -1,8 +1,6 @@
 #include <iostream>
 #include "Game.hpp"
 
-
-
 // private functions
 void Game::initvars()
 {
@@ -14,25 +12,15 @@ void Game::initwindow()
     this->video_mode.height = 600;
     this->video_mode.width = 800;
     //this->video_mode.getDesktopMode;
-    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Shapes!", sf::Style::Titlebar | sf::Style::Close);
+    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Avoidant square", sf::Style::Titlebar | sf::Style::Close); 
 }
 
-
-void Game::initEnemies()
-{
-    //this->enemy.setPosition();
-    this->enemy.setSize(sf::Vector2f(100.f, 100.f));
-    this->enemy.setFillColor(sf::Color::Cyan);
-    this->enemy.setOutlineThickness(1.f);
-    this->enemy.setOutlineColor(sf::Color::White);
-}
 // game constructor
 Game::Game()
 {
     this->initvars();
     this->initwindow();
-    this->initEnemies();
-    this->window->setFramerateLimit(144);
+    this->window->setFramerateLimit(60);
 }
 // game destructor
 Game::~Game()
@@ -46,10 +34,7 @@ const bool Game::getWindowIsOpen() const
     return this->window->isOpen();
 }
 
-
-
 // Functions (update game logic)
-
 void Game::pollEvents()
 {
     while (this->window->pollEvent(this->event))
@@ -66,10 +51,6 @@ void Game::pollEvents()
                     break;
                 }
         }
-        this->enemy.setPosition(
-                    mousePosWindowView.x - this->enemy.getSize().x / 2,
-                    mousePosWindowView.y - this->enemy.getSize().y / 2
-                    );
     }
 }
 
@@ -78,19 +59,7 @@ void Game::pollEvents()
 void Game::update()
 {
     this->pollEvents();
-    this->updateMousPos();
-    std::cout << mousePosWindowView.x << " " << mousePosWindowView.y << "\n"; 
-}
-
-void Game::updateMousPos()
-{
-    /** Update the mouse position relative to game window.
-    * Return: void
-    */
-   if (sf::Mouse::getPosition(*this->window).x >= 0 && sf::Mouse::getPosition(*this->window).y >= 0)
-   {
-    this->mousePosWindowView = sf::Mouse::getPosition(*this->window);
-   }
+    this->player->updatePlayer(sf::Mouse::getPosition());
 }
 
 
@@ -103,9 +72,8 @@ void Game::updateMousPos()
 */
 void Game::render()
 {
-
-    this->window->clear();
+    this->window->clear(sf::Color(54,69,79));
     // draw game
-    this->window->draw(this->enemy);
+    this->player->renderPlayer(this->window);
     this->window->display();
 }

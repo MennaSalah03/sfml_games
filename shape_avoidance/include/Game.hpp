@@ -1,8 +1,10 @@
-
 #ifndef GAME_H
     #define GAME_H
 #endif
 
+#include "Player.hpp"
+
+#include <vector>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -18,23 +20,20 @@
 class Game
 {
 private:
-
     //variables
     //window
     sf::RenderWindow *window; // pointer to window
     sf::VideoMode video_mode;
     sf::Event event;
     sf::Vector2i mousePosWindowView;
-    //Game objects
-    sf::RectangleShape enemy;
+
+    Player* player;
 
     // private functions
     void initvars();
     void initwindow();
-    void initEnemies();
 
 public:
-
     // con/destructors
     Game();
     virtual ~Game();
