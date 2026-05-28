@@ -1,6 +1,5 @@
 #ifndef GAME_H
     #define GAME_H
-#endif
 
 #include "Player.hpp"
 
@@ -25,7 +24,6 @@ private:
     sf::RenderWindow *window; // pointer to window
     sf::VideoMode video_mode;
     sf::Event event;
-    sf::Vector2i mousePosWindowView;
 
     Player* player;
 
@@ -45,7 +43,8 @@ public:
     // Functions
     void pollEvents();
     void update();
-    void updateMousPos();
     void render();
 
 };
+
+#endif

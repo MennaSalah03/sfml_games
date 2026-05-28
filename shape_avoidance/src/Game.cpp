@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Game.hpp"
+#include "Player.hpp"
 
 // private functions
 void Game::initvars()
@@ -11,8 +12,11 @@ void Game::initwindow()
 {
     this->video_mode.height = 600;
     this->video_mode.width = 800;
-    //this->video_mode.getDesktopMode;
-    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Avoidant square", sf::Style::Titlebar | sf::Style::Close); 
+    this->window = new sf::RenderWindow (
+            sf::VideoMode(this->video_mode.width, this->video_mode.height),
+            "Avoidant square",
+            sf::Style::Titlebar | sf::Style::Close
+        ); 
 }
 
 // game constructor
@@ -21,6 +25,7 @@ Game::Game()
     this->initvars();
     this->initwindow();
     this->window->setFramerateLimit(60);
+    this->player = new Player();
 }
 // game destructor
 Game::~Game()
@@ -50,6 +55,11 @@ void Game::pollEvents()
                     this->window->close();
                     break;
                 }
+            case sf::Event::MouseButtonPressed:
+                if (event.mouseButton.button == sf::Mouse::Left)
+                    player->increasePlayerSize();
+                else if (event.mouseButton.button == sf::Mouse::Right)
+                    player->decreasePlayersize();
         }
     }
 }
@@ -59,7 +69,8 @@ void Game::pollEvents()
 void Game::update()
 {
     this->pollEvents();
-    this->player->updatePlayer(sf::Mouse::getPosition());
+    player->updatePlayer(sf::Mouse::getPosition(*this->window));
+    player->limitPlayerMotion(static_cast<sf::Vector2f> (this->window->getSize()));
 }
 
 
@@ -72,7 +83,7 @@ void Game::update()
 */
 void Game::render()
 {
-    this->window->clear(sf::Color(54,69,79));
+    this->window->clear(sf::Color(43, 45, 66));
     // draw game
     this->player->renderPlayer(this->window);
     this->window->display();
