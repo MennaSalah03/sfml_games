@@ -2,6 +2,7 @@
     #define GAME_H
 
 #include "Player.hpp"
+#include "Enemy.hpp"
 
 #include <vector>
 #include <SFML/Audio.hpp>
@@ -26,11 +27,11 @@ private:
     sf::Event event;
 
     Player* player;
-
-    // private functions
+    std::vector<Enemy> *enemy;
+    
     void initvars();
     void initwindow();
-
+    int maxEnemies = 10;
 public:
     // con/destructors
     Game();

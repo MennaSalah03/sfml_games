@@ -1,6 +1,5 @@
 #ifndef ENEMY_H
     #define ENEMY_H
-#endif
 
 #include <vector>
 #include <SFML/Audio.hpp>
@@ -12,7 +11,18 @@
 class Enemy
 {
 private:
-    // variables
-    sf::RectangleShape enemy;
-    
+    sf::RectangleShape *enemy;
+public:
+    // constructors
+    Enemy();
+    virtual ~Enemy();
+
+    // initialize method
+    void initEnemy();
+    void increaseEnemySize();
+    void decreaseEnemySize();
+    void updateEnemy(sf::Vector2f newEnemyPos);
+    void renderEnemy(sf::RenderTarget* target);
 };
+
+#endif

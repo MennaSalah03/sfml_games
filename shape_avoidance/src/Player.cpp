@@ -25,7 +25,7 @@ void Player::initPlayer()
 
 void Player::limitPlayerMotion(sf::Vector2f windowSize)
 {
-    /**limitPlayerMotion
+    /** limitPlayerMotion
      * Limits where the player can go. It can't go beyond the window limits.
      * Updates the position to the limits of the window if it tries going beyond it.
      * windowSize: the size of the window
@@ -54,8 +54,12 @@ void Player::increasePlayerSize()
 void Player::decreasePlayersize()
 {
     float newRadius = this->player->getRadius() - 5.0;
+    // minimum possible decrease is 5    
+    if (newRadius < 5.0) newRadius = 5.0;
     this->player->setRadius(newRadius);
     this->player->setOrigin(newRadius, newRadius);
+
+
 }
 
 void Player::updatePlayer(sf::Vector2i newPlayerPos)

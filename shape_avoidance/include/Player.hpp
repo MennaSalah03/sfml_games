@@ -11,7 +11,7 @@
 class Player
 {
 private:
-    sf::CircleShape * player;
+    sf::CircleShape *player;
 public:
     Player();
     virtual ~Player();
@@ -21,7 +21,6 @@ public:
     void limitPlayerMotion(sf::Vector2f windowSize);
     void increasePlayerSize();
     void decreasePlayersize();
-    void adjustPlayerWithPointer();
 };
 
 #endif
