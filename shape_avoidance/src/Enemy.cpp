@@ -2,11 +2,12 @@
 #include "Enemy.hpp"
 
 // player constructor
-Enemy::Enemy()
+Enemy::Enemy(sf::Vector2f position)
 {
     this->enemy = new sf::RectangleShape();
-    this->initEnemy();
+    this->initEnemy(position);
 }
+
 // Player Deconstructor
 Enemy::~Enemy()
 {
@@ -14,9 +15,9 @@ Enemy::~Enemy()
     this->enemy = nullptr;
 }
 
-void Enemy::initEnemy()
+void Enemy::initEnemy(sf::Vector2f position)
 {
-    this->enemy->setPosition(750, 300);
+    this->enemy->setPosition(position);
     this->enemy->setSize(sf::Vector2f(25.f, 25.f));
     this->enemy->setOrigin(this->enemy->getSize().x, this->enemy->getSize().y);
     this->enemy->setFillColor(sf::Color(255, 241, 182));
@@ -37,9 +38,9 @@ void Enemy::decreaseEnemySize()
     this->enemy->setSize(sf::Vector2f(newHeight, newWidth));
 }
 
-void Enemy::updateEnemy(sf::Vector2f newEnemyPos)
+void Enemy::updateEnemy(sf::Vector2f EnemyPos)
 {
-    this->enemy->setPosition(newEnemyPos);
+    this->enemy->setPosition(EnemyPos.x, EnemyPos.y + 0.1f);
 }
 
 void Enemy::renderEnemy(sf::RenderTarget* target)

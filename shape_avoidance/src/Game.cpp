@@ -71,6 +71,7 @@ void Game::update()
     this->pollEvents();
     player->updatePlayer(sf::Mouse::getPosition(*this->window));
     player->limitPlayerMotion(static_cast<sf::Vector2f> (this->window->getSize()));
+
 }
 
 
